@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/UI/Button';
 import RegisterModal from '../components/RegisterModal';
+
 export const Landing = () => {
 	const navigate = useNavigate();
 	const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);

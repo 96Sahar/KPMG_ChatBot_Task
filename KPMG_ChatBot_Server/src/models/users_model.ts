@@ -1,12 +1,13 @@
 import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema;
-
-const userSchema = new Schema({
+export interface iUser {
+	email: string;
+	password: string;
+}
+const userSchema = new mongoose.Schema<iUser>({
 	email: { type: String, required: true, unique: true },
 	password: { type: String, required: true },
-	previousChats: { type: Array, default: [] },
 });
 
-const Users = mongoose.model('User', userSchema);
+const Users = mongoose.model<iUser>('User', userSchema);
 export default Users;

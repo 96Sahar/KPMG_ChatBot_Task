@@ -10,7 +10,7 @@ const getAllUsers = async (req: Request, res: Response) => {
 		res.status(200).send(usersFound);
 	} catch (err) {
 		console.log(err);
-		res.status(400).send(err.message);
+		res.status(400).send(err);
 	}
 	console.log('Get all Users');
 };
@@ -22,7 +22,7 @@ const getUserById = async (req: Request, res: Response) => {
 		res.status(200).send(userFound);
 	} catch (err) {
 		console.log(err);
-		res.status(400).send(err.message);
+		res.status(400).send(err);
 	}
 	console.log('Get User By Id');
 };

@@ -13,17 +13,22 @@ const initApp = (): Promise<Express> => {
 		const db = mongoose.connection;
 		db.on('error', console.error.bind(console, 'connection error:'));
 		db.once('open', () => console.log('Connected to Database'));
-		mongoose
-			.connect(process.env.DB_CONNECTION)
-			.then(() => {
-				app.use(bodyParser.json());
-				app.use(bodyParser.urlencoded({ extended: true }));
-				app.use('/users', usersRoute);
-				resolve(app);
-			})
-			.catch((err) => {
-				reject(err);
-			});
+
+		if (process.env.DB_CONNECTION) {
+			mongoose
+				.connect(process.env.DB_CONNECTION)
+				.then(() => {
+					app.use(bodyParser.json());
+					app.use(bodyParser.urlencoded({ extended: true }));
+					app.use('/users', usersRoute);
+					resolve(app);
+				})
+				.catch((err) => {
+					reject(err);
+				});
+		} else {
+			reject(new Error('DB_CONNECTION string is not defined'));
+		}
 	});
 };
 

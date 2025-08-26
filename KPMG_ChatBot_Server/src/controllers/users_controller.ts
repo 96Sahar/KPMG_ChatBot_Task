@@ -1,6 +1,7 @@
-import userModel from '../models/users_model.js';
+import userModel from '../models/users_model';
+import { Request, Response } from 'express';
 
-const getAllUsers = async (req, res) => {
+const getAllUsers = async (req: Request, res: Response) => {
 	const emailFilter = req.query.email;
 	try {
 		const usersFound = await userModel.find(
@@ -14,7 +15,7 @@ const getAllUsers = async (req, res) => {
 	console.log('Get all Users');
 };
 
-const getUserById = async (req, res) => {
+const getUserById = async (req: Request, res: Response) => {
 	try {
 		const userId = req.params.id;
 		const userFound = await userModel.findById(userId);
@@ -25,7 +26,7 @@ const getUserById = async (req, res) => {
 	}
 	console.log('Get User By Id');
 };
-const createUser = async (req, res) => {
+const createUser = async (req: Request, res: Response) => {
 	const user = req.body;
 	try {
 		const newUser = await userModel.create(user);

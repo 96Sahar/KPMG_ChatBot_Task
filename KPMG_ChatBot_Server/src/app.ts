@@ -1,4 +1,4 @@
-import initApp from './server.js';
+import initApp from './server';
 const PORT = process.env.PORT;
 
 const appInitiation = async () => {

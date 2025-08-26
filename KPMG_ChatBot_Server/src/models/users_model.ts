@@ -8,5 +8,5 @@ const userSchema = new Schema({
 	previousChats: { type: Array, default: [] },
 });
 
-const userModel = mongoose.model('User', userSchema);
-export default userModel;
+const Users = mongoose.model('User', userSchema);
+export default Users;

@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../components/Button';
-
+import Button from '../components/UI/Button';
+import RegisterModal from '../components/RegisterModal';
 export const Landing = () => {
 	const navigate = useNavigate();
+	const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+
+	const openRegisterModal = () => setIsRegisterModalOpen(true);
+	const closeRegisterModal = () => setIsRegisterModalOpen(false);
 
 	return (
 		<div className="flex justify-center items-center min-h-screen">
@@ -17,11 +22,20 @@ export const Landing = () => {
 					>
 						Login
 					</Button>
-					<Button buttonStyle="main" className="ml-4">
+					<Button
+						buttonStyle="main"
+						className="ml-4"
+						onClick={openRegisterModal}
+					>
 						Register
 					</Button>
 				</div>
 			</div>
+
+			<RegisterModal
+				isOpen={isRegisterModalOpen}
+				onClose={closeRegisterModal}
+			/>
 		</div>
 	);
 };

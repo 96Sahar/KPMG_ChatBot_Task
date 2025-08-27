@@ -26,4 +26,7 @@ export const registerSchema = z
 		}
 	});
 
+export const loginSchema = registerSchema.omit({ confirmPassword: true });
+
 export type RegisterFormFields = z.infer<typeof registerSchema>;
+export type LoginFormFields = z.infer<typeof loginSchema>;

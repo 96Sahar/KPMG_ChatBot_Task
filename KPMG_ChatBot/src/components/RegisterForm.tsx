@@ -27,7 +27,10 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit, onClose }) => {
 		} catch (error) {
 			console.log(error);
 			setError('root', {
-				message: 'Registration failed. Please try again.',
+				message:
+					error instanceof Error
+						? error.message
+						: 'Registration failed. Please try again.',
 			});
 		}
 	};

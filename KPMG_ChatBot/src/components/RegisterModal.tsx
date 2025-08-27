@@ -3,6 +3,7 @@ import Modal from './Modal';
 import ModalHeader from './ModalHeader';
 import RegisterForm from './RegisterForm';
 import { type RegisterFormFields } from '../utils/authSchema';
+import { register } from '../services/userServices';
 
 interface RegisterModalProps {
 	isOpen: boolean;
@@ -10,9 +11,13 @@ interface RegisterModalProps {
 }
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose }) => {
-	const handleSubmit = async (data: RegisterFormFields): Promise<void> => {
-		await new Promise((resolve) => setTimeout(resolve, 1000));
-		console.log(data);
+	const handleSubmit = async (data: RegisterFormFields) => {
+		const response = await register({
+			email: data.email,
+			password: data.password,
+		});
+		console.log('Registration successful: ', response);
+		onClose();
 	};
 
 	return (

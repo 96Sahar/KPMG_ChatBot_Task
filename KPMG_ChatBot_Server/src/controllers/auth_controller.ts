@@ -3,13 +3,24 @@ import userModel from '../models/users_model';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { tokenPayload, generateTokens } from '../middleware/auth_middleware';
+import { email_regex, password_regex } from '../utils/regex';
 
 const register = async (req: Request, res: Response) => {
 	const { email, password } = req.body;
 	if (!email || !password) {
 		return res.status(400).send('Missing data');
 	}
+	if (!email_regex.test(email)) {
+		return res.status(400).send('Invalid email');
+	}
+	if (!password_regex.test(password)) {
+		return res.status(400).send('Invalid password');
+	}
 	try {
+		const existingUser = await userModel.findOne({ email: email });
+		if (existingUser) {
+			return res.status(402).send('Email already in use');
+		}
 		const salt = await bcrypt.genSalt(10);
 		const hashedPassword = await bcrypt.hash(password, salt);
 		const user = await userModel.create({
@@ -18,11 +29,9 @@ const register = async (req: Request, res: Response) => {
 		});
 		return res.status(201).send(user);
 	} catch (err) {
-		res.status(400).send('registration failed' + err);
-		return;
+		return res.status(400).send('Registration failed: ' + err);
 	}
 };
-
 const login = async (req: Request, res: Response) => {
 	const { email, password } = req.body;
 	if (!email || !password) {
@@ -162,4 +171,5 @@ const refresh = async (req: Request, res: Response) => {
 		}
 	);
 };
+
 export default { register, login, logout, refresh };

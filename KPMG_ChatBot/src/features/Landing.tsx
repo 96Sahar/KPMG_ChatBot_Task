@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import Button from '../components/UI/Button';
 import RegisterModal from '../components/RegisterModal';
 import { useForm, type SubmitHandler } from 'react-hook-form';
@@ -45,7 +46,12 @@ export const Landing = () => {
 
 	return (
 		<div className="flex justify-center items-center min-h-screen">
-			<div className="max-w-5xl bg-white rounded-2xl px-20 py-16 text-center space-y-12 shadow-layered-card">
+			<motion.div
+				className="max-w-5xl bg-white rounded-2xl px-20 py-16 text-center space-y-12 shadow-layered-card"
+				initial={{ opacity: 0, y: 20 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ duration: 1, ease: 'easeOut' }}
+			>
 				<h1 className="text-2xl font-semibold leading-tight whitespace-pre-line text-dark-blue">
 					Welcome to the KPMG AI Chatbot!
 				</h1>
@@ -101,7 +107,7 @@ export const Landing = () => {
 						)}
 					</form>
 				</div>
-			</div>
+			</motion.div>
 
 			<RegisterModal
 				isOpen={isRegisterModalOpen}

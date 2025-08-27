@@ -3,6 +3,7 @@ import userModel from '../models/users_model';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { tokenPayload, generateTokens } from '../middleware/auth_middleware';
+
 const register = async (req: Request, res: Response) => {
 	const { email, password } = req.body;
 	if (!email || !password) {

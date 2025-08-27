@@ -1,7 +1,6 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import users_routes from './routes/users_route';
 import auth_routes from './routes/auth_routes';
 import bodyParser from 'body-parser';
 
@@ -21,7 +20,6 @@ const initApp = (): Promise<Express> => {
 				.then(() => {
 					app.use(bodyParser.json());
 					app.use(bodyParser.urlencoded({ extended: true }));
-					app.use('/users', users_routes);
 					app.use('/auth', auth_routes);
 					resolve(app);
 				})

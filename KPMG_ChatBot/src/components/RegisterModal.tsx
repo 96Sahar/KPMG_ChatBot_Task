@@ -4,6 +4,7 @@ import ModalHeader from './ModalHeader';
 import RegisterForm from './RegisterForm';
 import { type RegisterFormFields } from '../utils/authSchema';
 import { register } from '../services/userServices';
+import { toast } from 'sonner';
 
 interface RegisterModalProps {
 	isOpen: boolean;
@@ -16,6 +17,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose }) => {
 			email: data.email,
 			password: data.password,
 		});
+		toast.success('Registration succeed!');
 		console.log('Registration successful: ', response);
 		onClose();
 	};

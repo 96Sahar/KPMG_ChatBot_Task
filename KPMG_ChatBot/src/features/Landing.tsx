@@ -7,6 +7,7 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { type LoginFormFields, loginSchema } from '../utils/authSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { login } from '../services/userServices';
+import { toast } from 'sonner';
 
 export const Landing = () => {
 	const navigate = useNavigate();
@@ -25,9 +26,11 @@ export const Landing = () => {
 				email: data.email,
 				password: data.password,
 			});
+			toast.success('Login successful!', { duration: 2500 });
 			navigate('./ChatBot');
 			console.log('Login successful: ', response);
 		} catch (err) {
+			toast.error('Something went wrong');
 			console.log('server error: ' + err);
 			setError('root', {
 				type: 'server',

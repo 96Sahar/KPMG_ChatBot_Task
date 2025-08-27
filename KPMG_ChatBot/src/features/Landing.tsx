@@ -52,9 +52,9 @@ export const Landing = () => {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 1, ease: 'easeOut' }}
 			>
-				<h1 className="text-2xl font-semibold leading-tight whitespace-pre-line text-dark-blue">
+				<div className="text-2xl font-semibold leading-tight whitespace-pre-line text-dark-blue">
 					Welcome to the KPMG AI Chatbot!
-				</h1>
+				</div>
 				<div className="flex flex-col items-center space-y-6">
 					<form
 						className="flex flex-col items-center space-y-4 w-full max-w-md"

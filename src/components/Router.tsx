@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Landing from '../features/Landing';
 import ChatBot from '../features/ChatBot';
 import Layout from '../Layout';
+import Landing from '@/features/Landing';
 
 const Router = () => (
 	<BrowserRouter>

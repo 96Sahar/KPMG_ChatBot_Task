@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const URL = import.meta.env.VITE_URL;
-
+const URL = import.meta.env.VITE_BASE_URL;
 const client = axios.create({
 	baseURL: URL,
 	headers: {

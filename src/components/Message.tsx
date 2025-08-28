@@ -8,7 +8,6 @@ interface MessageProps {
 }
 const Message = ({ message, isUser }: MessageProps) => {
 	const bottomRef = useRef<HTMLDivElement | null>(null);
-	console.log('Rendering message:', message.length);
 
 	useEffect(() => {
 		bottomRef.current?.scrollIntoView({ behavior: 'smooth' });

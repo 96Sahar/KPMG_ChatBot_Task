@@ -14,8 +14,9 @@ interface RegisterModalProps {
 const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose }) => {
 	const handleSubmit = async (data: RegisterFormFields) => {
 		const response = await register({
+			firstName: data.firstName,
+			lastName: data.lastName,
 			email: data.email,
-			password: data.password,
 		});
 		toast.success('Registration succeed!');
 		console.log('Registration successful: ', response);

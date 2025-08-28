@@ -3,17 +3,42 @@ import { client, setAuthToken } from './httpClient';
 import type { LoginData, RegisterData } from './interfaceServices';
 import { clearLocalStorage } from '../utils/functions';
 
+// const register = async (userData: RegisterData) => {
+// 	try {
+// 		const response = await client.post('/auth/register', userData);
+// 		console.log(response.data);
+// 		return response.data;
+// 	} catch (err) {
+// 		if (axios.isAxiosError(err))
+// 			throw new Error(
+// 				err.response?.data || 'Registration failed via an axios error'
+// 			);
+// 		throw new Error('Registration failed');
+// 	}
+// };
+
+const sendMessage = async (messageContent: string) => {
+	try {
+		const sendMessageCode = import.meta.env.VITE_SEND_MESSAGE_FUNCTION_CODE;
+		const response = await client.post(sendMessageCode, messageContent);
+		const result = await response.data;
+		console.log('Send message result: ' + result.messageData);
+		return result.messageData;
+	} catch (error) {
+		console.error('Sending message failed with error: ' + error);
+	}
+};
 const register = async (userData: RegisterData) => {
 	try {
-		const response = await client.post('/auth/register', userData);
-		console.log(response.data);
-		return response.data;
-	} catch (err) {
-		if (axios.isAxiosError(err))
-			throw new Error(
-				err.response?.data || 'Registration failed via an axios error'
-			);
-		throw new Error('Registration failed');
+		const registerCode = import.meta.env.VITE_REGISTER_FUNCTION_CODE;
+		console.log('Register Code : ' + registerCode);
+		const response = await client.post(registerCode, userData);
+		console.log(response);
+		const result = await response.data;
+		console.log('Database test result: ', result);
+		return result;
+	} catch (error) {
+		console.error('Database test failed: ', error);
 	}
 };
 
@@ -56,4 +81,4 @@ const logout = async () => {
 		throw new Error('Logout failed');
 	}
 };
-export { register, login, logout };
+export { register, login, logout, sendMessage };

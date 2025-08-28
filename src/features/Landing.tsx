@@ -3,42 +3,51 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Button from '../components/UI/Button';
 import RegisterModal from '../components/RegisterModal';
-import { useForm, type SubmitHandler } from 'react-hook-form';
-import { type LoginFormFields, loginSchema } from '../utils/authSchema';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { login } from '../services/userServices';
-import { toast } from 'sonner';
+import { useForm } from 'react-hook-form';
+// import { type LoginFormFields, loginSchema } from '../utils/authSchema';
+// import { zodResolver } from '@hookform/resolvers/zod';
+// import { login } from '../services/userServices';
+// import { toast } from 'sonner';
 
 export const Landing = () => {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	const {
 		register,
 		handleSubmit,
-		setError,
+		// setError,
 		formState: { errors, isSubmitting },
-	} = useForm<LoginFormFields>({
-		resolver: zodResolver(loginSchema),
-	});
+	} = useForm({});
 
-	const onSubmit: SubmitHandler<LoginFormFields> = async (data) => {
+	// const onSubmit = async (data:) => {
+	// 	try {
+	// 		const response = await login({
+	// 			email: data.email,
+	// 			password: data.password,
+	// 		});
+	// 		toast.success('Login successful!', { duration: 2500 });
+	// 		navigate('./ChatBot');
+	// 		console.log('Login successful: ', response);
+	// 	} catch (err) {
+	// 		toast.error('Something went wrong');
+	// 		console.log('server error: ' + err);
+	// 		setError('root', {
+	// 			type: 'server',
+	// 			message:
+	// 				err instanceof Error
+	// 					? err.message
+	// 					: 'Login failed. Please try again.',
+	// 		});
+	// 	}
+	// };
+	const onSubmit = async () => {
 		try {
-			const response = await login({
-				email: data.email,
-				password: data.password,
-			});
-			toast.success('Login successful!', { duration: 2500 });
-			navigate('./ChatBot');
-			console.log('Login successful: ', response);
-		} catch (err) {
-			toast.error('Something went wrong');
-			console.log('server error: ' + err);
-			setError('root', {
-				type: 'server',
-				message:
-					err instanceof Error
-						? err.message
-						: 'Login failed. Please try again.',
-			});
+			const response = await fetch(
+				'https://chat-bot-app-gtaqazfch2bcgwbw.israelcentral-01.azurewebsites.net/api/testMongoDB?code=1npcHPyWaUk37FnYKVQbY0pogbGS0tN5npjy91BlYeyuAzFuaOW9gA=='
+			);
+			const result = await response.json();
+			console.log('Database test result: ', result);
+		} catch (error) {
+			console.log('Database test failed: ', error);
 		}
 	};
 
@@ -71,7 +80,7 @@ export const Landing = () => {
 						/>
 						{errors.email && (
 							<span className="text-red-500">
-								{errors.email.message}
+								{/* {errors.email.message} */}
 							</span>
 						)}
 						<input
@@ -82,7 +91,7 @@ export const Landing = () => {
 						/>
 						{errors.password && (
 							<span className="text-red-500">
-								{errors.password.message}
+								{/* {errors.password.message} */}
 							</span>
 						)}
 
@@ -94,14 +103,6 @@ export const Landing = () => {
 							>
 								{isSubmitting ? 'Submitting' : 'Submit'}
 							</Button>
-							<Button
-								disabled={isSubmitting}
-								buttonStyle="main"
-								type="button"
-								onClick={openRegisterModal}
-							>
-								{isSubmitting ? 'Submitting' : 'Register'}
-							</Button>
 						</div>
 						{errors.root && (
 							<span className="text-red-500">
@@ -109,6 +110,15 @@ export const Landing = () => {
 							</span>
 						)}
 					</form>
+					<div>
+						Don't have an account?{' '}
+						<button
+							className="text-blue hover:cursor-pointer"
+							onClick={openRegisterModal}
+						>
+							sign up!
+						</button>
+					</div>
 				</div>
 			</motion.div>
 

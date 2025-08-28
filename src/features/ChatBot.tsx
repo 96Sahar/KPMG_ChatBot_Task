@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Message from '../components/Message';
 import { motion } from 'framer-motion';
+import Sidebar from '@/components/UI/Sidebar';
+import { sendMessage } from '@/services/userServices';
 
 interface MessageType {
 	text: string;
@@ -11,16 +13,26 @@ const ChatBot = () => {
 	const [input, setInput] = useState('');
 	const [messages, setMessages] = useState<MessageType[]>([]);
 
-	const handleSend = () => {
-		if (input.trim()) {
-			setMessages((prev) => [...prev, { text: input, isUser: true }]);
-			setMessages((prev) => [...prev, { text: input, isUser: false }]);
+	const handleSend = async () => {
+		if (!input) return;
+		const message = await sendMessage(input.trim());
+		if (message) {
+			setMessages((prev) => [...prev, { text: message, isUser: true }]);
+			setTimeout(
+				() =>
+					setMessages((prev) => [
+						...prev,
+						{ text: message, isUser: false },
+					]),
+				1000
+			);
 			setInput('');
 		}
 	};
 
 	return (
 		<div className="h-screen w-screen flex items-center justify-center">
+			<Sidebar />
 			<div className="text-center h-[80vh] w-[80vh] flex flex-col pt-6 bg-black/10 rounded-xl">
 				<div className="flex-1">
 					{messages.map((message, index) => (

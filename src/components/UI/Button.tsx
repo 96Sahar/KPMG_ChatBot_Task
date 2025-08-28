@@ -25,7 +25,7 @@ const Button = ({
 				type={type}
 				disabled={disabled}
 				onClick={onClick}
-				className={`flex text-dark-blue ${style} transition-colors duration-300 cursor-pointer ${className}`}
+				className={`flex text-dark-blue ${style} transition-all duration-300 cursor-pointer ${className}`}
 			>
 				{children}
 			</button>

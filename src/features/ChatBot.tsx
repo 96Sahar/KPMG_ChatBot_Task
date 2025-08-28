@@ -31,7 +31,7 @@ const ChatBot = () => {
 	};
 
 	return (
-		<div className="h-screen w-screen flex items-center justify-center">
+		<div className=" h-screen w-screen flex items-center justify-center">
 			<Sidebar />
 			<div className="text-center h-[80vh] w-[80vh] flex flex-col pt-6 bg-black/10 rounded-xl">
 				<div className="flex-1">

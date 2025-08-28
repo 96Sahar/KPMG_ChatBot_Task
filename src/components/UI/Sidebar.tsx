@@ -8,7 +8,7 @@ import RecentChatItem from '../RecentChatItem';
 
 const Sidebar = () => {
 	return (
-		<div className="fixed left-0 top-0 h-screen w-100 bg-white shadow-2xl flex flex-col rounded-lg">
+		<div className="h-screen w-1/5 bg-white shadow-2xl flex flex-col rounded-lg">
 			<div className="px-6 py-8 border-b border-gray-300 ">
 				<div className="flex items-center space-x-3 mb-2">
 					<div className="w-8 h-8 bg-orange-300 rounded-xl flex items-center justify-center shadow-sm">

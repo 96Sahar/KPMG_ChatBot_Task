@@ -1,9 +1,10 @@
 const dummyData = [
-	'How to use Azure OpenAI service',
-	'how to use and authentication with entraID',
-	'Help me implement redis Cache',
+	'Azure OpenAI service Guide',
+	'authentication with entraID',
+	'redis Cache explanation ',
 	'Azure function as a microservice architecture',
 	'Getting started with cosmosDB',
+	'Why KPMG hates Sahar',
 ];
 
 export default dummyData;

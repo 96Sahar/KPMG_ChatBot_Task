@@ -50,7 +50,7 @@ const ChatBot = () => {
 	useEffect(() => setMessages([{ text: 'Welcome!', isUser: false }]), []);
 
 	return (
-		<div className="w-screen h-screen flex bg-light-grey">
+		<div className="w-screen h-screen flex bg-light-grey ">
 			<Sidebar clearChat={clearChat} newChat={newChat} />
 
 			<div className="flex flex-1 items-center justify-center p-4">
@@ -60,7 +60,7 @@ const ChatBot = () => {
 					animate={{ opacity: 1, scale: 1 }}
 					transition={{ duration: 0.5 }}
 				>
-					<div className="flex flex-col h-full bg-grey rounded-2xl shadow-xl border border-gray-300 relative ">
+					<div className="flex flex-col h-full bg-grey rounded-2xl shadow-xl border border-gray-300 relative  ">
 						<ChatHeader
 							main="KPMG Chat Assistant"
 							description="Ready to help"
@@ -76,9 +76,9 @@ const ChatBot = () => {
 							<div ref={messagesEndRef} />
 						</div>
 
-						<div className="p-6 bg-gradient-to-t from-black/10 to-transparent border-t border-black/10">
+						<div className="p-6 bg-gradient-to-t from-black/10 to-transparent border-t border-black/10 rounded-b-2xl">
 							<div className="flex items-center p-4 bg-white rounded-2xl shadow-lg hover:shadow-xl hover:border-gray-300 duration-300 transition-all ">
-								<div className="flex-1 relative">
+								<div className="flex-1 relative rounded-2xl">
 									<input
 										type="text"
 										value={input}

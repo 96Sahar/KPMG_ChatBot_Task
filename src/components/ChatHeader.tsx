@@ -7,7 +7,7 @@ interface ChatHeaderInterface {
 const ChatHeader = ({ main, description }: ChatHeaderInterface) => {
 	return (
 		<motion.div
-			className="p-4 bg-gradient-to-r from-black/5 to-black/10 border-b border-black/10"
+			className="p-4 bg-gradient-to-r from-black/5 to-black/10 border-b border-black/10 rounded-t-2xl"
 			initial={{ opacity: 0, y: -10 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.2 }}

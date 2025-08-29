@@ -56,14 +56,17 @@ const ChatBot = () => {
 
 			<div className="flex flex-1 items-center justify-center p-4">
 				<motion.div
-					className={`flex flex-col ${
-						expandedChat ? `w-full h-full` : `w-1/3 h-[90%]`
-					}  w-1/3 relative `}
+					className="flex flex-col relative"
 					initial={{ opacity: 0, scale: 0.95 }}
-					animate={{ opacity: 1, scale: 1 }}
-					transition={{ duration: 0.5 }}
+					animate={{
+						opacity: 1,
+						scale: 1,
+						width: expandedChat ? '100%' : '33%',
+						height: expandedChat ? '100%' : '90%',
+					}}
+					transition={{ duration: 0.4, ease: 'easeInOut' }}
 				>
-					<div className="flex flex-col h-full bg-grey rounded-2xl shadow-xl border border-gray-300 relative  ">
+					<div className="flex flex-col h-full bg-grey rounded-2xl shadow-xl border border-gray-300 relative">
 						<ChatHeader
 							main="KPMG Chat Assistant"
 							description="Ready to help"

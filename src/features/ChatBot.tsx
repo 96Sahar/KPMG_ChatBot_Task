@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Message from '../components/Message';
 import { motion } from 'framer-motion';
 import Sidebar from '@/components/UI/Sidebar';
-import { sendMessage } from '@/services/userServices';
+import Button from '@/components/UI/Button';
 
 interface MessageType {
 	text: string;
@@ -12,31 +12,37 @@ interface MessageType {
 const ChatBot = () => {
 	const [input, setInput] = useState('');
 	const [messages, setMessages] = useState<MessageType[]>([]);
-
-	const handleSend = async () => {
-		if (!input) return;
-		const message = await sendMessage(input.trim());
-		if (message) {
-			setMessages((prev) => [...prev, { text: message, isUser: true }]);
-			setTimeout(
-				() =>
-					setMessages((prev) => [
-						...prev,
-						{ text: message, isUser: false },
-					]),
-				1000
-			);
-			setInput('');
-		}
+	const messagesEndRef = useRef<HTMLDivElement>(null);
+	const newChat = () => {
+		setMessages(() => [{ text: 'Welcome!', isUser: false }]);
 	};
+	const clearChat = () => {
+		setMessages(() => []);
+	};
+	const handleSendMessage = () => {
+		if (!input) return;
+		setMessages((prev) => [...prev, { text: input, isUser: true }]);
+		setTimeout(
+			() =>
+				setMessages((prev) => [
+					...prev,
+					{ text: input, isUser: false },
+				]),
+			1000
+		);
+		setInput('');
+	};
+	useEffect(() => {
+		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+	}, [messages]);
+	useEffect(() => setMessages([{ text: 'Welcome!', isUser: false }]), []);
 
 	return (
-		<div className="h-screen w-screen flex">
-			<Sidebar />
-
-			<div className="flex flex-1 items-center justify-center">
-				<div className="text-center h-9/10 w-1/3 flex flex-col pt-6 bg-black/10 rounded-xl">
-					<div className="flex-1">
+		<div className="w-screen h-screen flex">
+			<Sidebar clearChat={clearChat} newChat={newChat} />
+			<div className="flex flex-1 items-center justify-center p-4">
+				<div className="flex flex-col h-[90%] w-1/3 bg-black/10 rounded-xl">
+					<div className="flex-1 overflow-y-auto p-4 space-y-2">
 						{messages.map((message, index) => (
 							<Message
 								key={index}
@@ -44,7 +50,9 @@ const ChatBot = () => {
 								isUser={message.isUser}
 							/>
 						))}
+						<div ref={messagesEndRef} />
 					</div>
+
 					<motion.div
 						className="p-4"
 						initial={{ opacity: 0, y: 10 }}
@@ -57,17 +65,18 @@ const ChatBot = () => {
 								value={input}
 								onChange={(e) => setInput(e.target.value)}
 								onKeyDown={(e) =>
-									e.key === 'Enter' && handleSend()
+									e.key === 'Enter' && handleSendMessage()
 								}
 								placeholder="Type your message..."
-								className="flex-1 outline-none text-sm"
+								className="flex-1 outline-none text-sm min-w-0"
 							/>
-							<button
-								onClick={handleSend}
-								className="px-3 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+							<Button
+								buttonStyle="main"
+								onClick={handleSendMessage}
+								className="flex-shrink-0 w-fit px-4 text-dark-blue hover:cursor-pointer"
 							>
 								Send
-							</button>
+							</Button>
 						</div>
 					</motion.div>
 				</div>

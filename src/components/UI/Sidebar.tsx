@@ -1,12 +1,17 @@
-import chatIconLight from '/public/icons/chatIconLight.svg';
-import whitePlusSign from '/public/icons/whitePlusSign.svg';
-import clock from '/public/icons/clock.svg';
-import cogWheelIcon from '/public/icons/cogWheelIcon.svg';
+import chatIconLight from '@/assets/icons/chatIconLight.svg';
+import whitePlusSign from '@/assets/icons/whitePlusSign.svg';
+import clock from '@/assets/icons/clock.svg';
+import cogWheelIcon from '@/assets/icons/cogWheelIcon.svg';
 import dummyData from '@/utils/dummyData';
 import Button from './Button';
 import RecentChatItem from '../RecentChatItem';
 
-const Sidebar = () => {
+interface SideBarInterface {
+	clearChat: () => void;
+	newChat: () => void;
+}
+
+const Sidebar = ({ clearChat, newChat }: SideBarInterface) => {
 	return (
 		<div className="h-screen w-1/5 bg-white shadow-2xl flex flex-col rounded-lg">
 			<div className="px-6 py-8 border-b border-gray-300 ">
@@ -29,6 +34,7 @@ const Sidebar = () => {
 				<Button
 					buttonStyle="main"
 					className="w-full text-white font-medium py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105"
+					onClick={newChat}
 				>
 					<div className="flex items-center justify-center space-x-2">
 						<img
@@ -62,7 +68,10 @@ const Sidebar = () => {
 						QUICK ACTIONS
 					</p>
 					<div className="space-y-2">
-						<button className="w-full text-left p-2 hover:bg-orange-50 rounded-lg transition-colors duration-200 hover:cursor-pointer">
+						<button
+							className="w-full text-left p-2 hover:bg-orange-50 rounded-lg duration-200 cursor-pointer"
+							onClick={clearChat}
+						>
 							<div className="flex items-center space-x-2 text-xs text-dark-blue">
 								<div className="w-2 h-2 bg-blue-400 rounded-full group-hover:bg-blue-500"></div>
 								<span>Clear Chat History</span>
@@ -73,12 +82,12 @@ const Sidebar = () => {
 			</div>
 
 			<div className="px-6 py-4 border-t border-gray-300 flex-shrink-0">
-				<div className="flex items-center justify-between hover:cursor-pointer">
+				<div className="flex items-center justify-between cursor-pointer">
 					<div className="flex items-center space-x-2 text-dark-grey text-xs">
 						<div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
 						<span>Online</span>
 					</div>
-					<button className="p-1.5 hover:bg-orange-50 rounded-lg transition-colors duration-200 hover:cursor-pointer">
+					<button className="p-1.5 hover:bg-orange-50 rounded-lg transition-colors duration-200 cursor-pointer">
 						<img
 							src={cogWheelIcon}
 							alt="Cog Wheel Icon"

@@ -1,17 +1,22 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import useAnimatedText from '@/hooks/useAnimatedText';
 
 interface MessageProps {
 	message: string;
 	icon?: string;
 	isUser?: boolean;
 }
+
 const Message = ({ message, isUser }: MessageProps) => {
 	const bottomRef = useRef<HTMLDivElement | null>(null);
-
+	const messageSpeed = message.length > 20 ? 3 : 1;
+	const animatedText = useAnimatedText(message, messageSpeed);
+	const textToRender = isUser ? message : animatedText;
 	useEffect(() => {
 		bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
 	}, [message]);
+
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 10 }}
@@ -30,7 +35,7 @@ const Message = ({ message, isUser }: MessageProps) => {
 			>
 				<div
 					dangerouslySetInnerHTML={{
-						__html: message,
+						__html: textToRender,
 					}}
 				/>
 			</div>

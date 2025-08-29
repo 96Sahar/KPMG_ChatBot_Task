@@ -4,7 +4,6 @@ const dummyData = [
 	'redis Cache explanation ',
 	'Azure function as a microservice architecture',
 	'Getting started with cosmosDB',
-	'Why KPMG hates Sahar',
 ];
 
 export default dummyData;

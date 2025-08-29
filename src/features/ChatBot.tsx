@@ -14,7 +14,7 @@ interface MessageType {
 
 const ChatBot = () => {
 	const [input, setInput] = useState('');
-	const [expandedChat, setExpandedChat] = useState<boolean>(true);
+	const [expandedChat, setExpandedChat] = useState<boolean>(false);
 	const [messages, setMessages] = useState<MessageType[]>([]);
 	const messagesEndRef = useRef<HTMLDivElement>(null);
 

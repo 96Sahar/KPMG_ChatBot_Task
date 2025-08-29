@@ -14,6 +14,7 @@ interface MessageType {
 
 const ChatBot = () => {
 	const [input, setInput] = useState('');
+	const [expandedChat, setExpandedChat] = useState<boolean>(true);
 	const [messages, setMessages] = useState<MessageType[]>([]);
 	const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -55,7 +56,9 @@ const ChatBot = () => {
 
 			<div className="flex flex-1 items-center justify-center p-4">
 				<motion.div
-					className="flex flex-col h-[90%] w-1/3 min-w-[400px] max-w-[600px] relative"
+					className={`flex flex-col ${
+						expandedChat ? `w-full h-full` : `w-1/3 h-[90%]`
+					}  w-1/3 relative `}
 					initial={{ opacity: 0, scale: 0.95 }}
 					animate={{ opacity: 1, scale: 1 }}
 					transition={{ duration: 0.5 }}
@@ -64,6 +67,8 @@ const ChatBot = () => {
 						<ChatHeader
 							main="KPMG Chat Assistant"
 							description="Ready to help"
+							expandedChat={expandedChat}
+							setExpandedChat={setExpandedChat}
 						/>
 						<div className="flex-1 overflow-y-auto p-6 space-y-3 relative hide-scrollbar">
 							{messages.map((message, index) => (

@@ -50,10 +50,10 @@ const Sidebar = ({ clearChat, newChat }: SideBarInterface) => {
 			</div>
 
 			<div className="px-6 py-6 flex-1 flex flex-col min-h-0">
-				<h2 className="text-dark-blue font-medium text-sm tracking-widest mb-4 flex items-center space-x-2">
+				<p className="text-dark-blue font-medium text-sm tracking-widest mb-4 flex items-center space-x-2">
 					<img src={clock} alt="Clock" className="w-5 h-5" />
 					<span>Recent Chats</span>
-				</h2>
+				</p>
 
 				<div className="space-y-2 flex-1 overflow-y-auto min-h-0">
 					{dummyData.map((chat, index) => (
